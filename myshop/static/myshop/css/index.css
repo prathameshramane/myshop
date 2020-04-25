@@ -1,0 +1,25 @@
+.Ext_navbar {
+    background-color:rgb(108, 108, 108)
+}
+
+.Ext_navbar a {
+    color: white;
+}
+
+.carousel-control-prev-icon {
+    background-color: black;
+}
+
+.carousel-control-next-icon {
+    background-color: black;
+}
+
+.EXT_card {
+    max-width: 265px;
+}
+
+.EXT_card img {
+    width: 200px;
+    height: 190px;
+    margin: 13px auto;
+}

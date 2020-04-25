@@ -1,0 +1,65 @@
+{% extends 'myshop/basic.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'myshop/css/index.css' %}">
+{% endblock css %}
+
+{% block body %}
+<div class="container-fluid my-3">
+
+    <!-- About me  -->
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to Myshop</h1>
+        <p class="lead">Just made this for practice purpose when I newly learned python django... Thanks for exploring
+            my first E-commerce website... I hope you love it...</p>
+        <hr class="my-4">
+        <p>I have used HTML-5, CSS, JS, jQuery, Bootstrap, and django</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">About me</a>
+    </div>
+
+    {% for category in products %}
+    <h3 class='my-3 mx-5'> Flash sell on : {{category.0}} </h3>
+    <div id="carouselExampleControls{{forloop.counter}}" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row justify-content-md-center">
+                    {% for product in category.1 %}
+                    <div class="card col-3 mx-2 my-2 EXT_card" style="width: 18rem;">
+                        <img src="media/{{product.product_image}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title" id="prod{{product.id}}">{{product.product_name}}</h5>
+                            <p class="card-text">{{product.product_desc}}</p>
+                            <a id="add_to_cart_prod{{product.id}}" href="#" class="btn btn-primary add_to_cart">Add to
+                                cart</a>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row justify-content-md-center">
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls{{forloop.counter}}" role="button"
+            data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls{{forloop.counter}}" role="button"
+            data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock body %}
+
+{% block js %}
+<script src="{% static 'myshop/js/index.js' %}"></script>
+{% endblock js %}
