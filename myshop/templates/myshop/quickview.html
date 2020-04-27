@@ -1,39 +1,44 @@
 {% extends 'myshop/basic.html' %}
-{% load static %}
 
 {% block css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'myshop/css/quickview.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'myshop/css/index.css' %}">
+
 {% endblock css %}
 
 {% block body %}
-<div class="container-fluid my-3">
+<div class="container">
+    <div class="row my-3">
+        <img src="/media/{{product.product_image}}" alt="product_image" class="col mx-2">
+        <div class="col prod_info">
+            <h4>{{product.product_name}}</h4>
+            <p><strong>MRP.</strong> {{product.product_cost}}</p>
+            <h5>Product description : </h5>
+            <p>{{product.product_desc}}</p>
+            <a id="add_to_cart_prod{{product.id}}" href="#" class="btn btn-primary add_to_cart col">Add to
+                cart</a>
 
-    <!-- About me  -->
-    <div class="jumbotron">
-        <h1 class="display-4">Welcome to Myshop</h1>
-        <p class="lead">Just made this for practice purpose when I newly learned python django... Thanks for exploring
-            my first E-commerce website... I hope you love it...</p>
-        <hr class="my-4">
-        <p>I have used HTML-5, CSS, JS, jQuery, Bootstrap, and django</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">About me</a>
+        </div>
     </div>
+</div>
 
-    {% for category in products %}
-    <h3 class='my-3 mx-5'> Flash sell on : {{category.0}} </h3>
+<div class="container-fluid my-3">
+    <h3 class="mx-4">Similar items : </h3>
+
     <div id="carouselExampleControls{{forloop.counter}}" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="row justify-content-md-center">
-                    {% for product in category.1 %}
+                    {% for product in sub_category_prods %}
                     <div class="card col-3 mx-2 my-2 EXT_card" style="width: 18rem;">
-                        <img src="media/{{product.product_image}}" class="card-img-top" alt="...">
+                        <img src="/media/{{product.product_image}}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title" id="prod{{product.id}}">{{product.product_name}}</h5>
                             <p class="card-text">{{product.product_desc}}</p>
-                            <div class="row prod_btn">
-                                <a class="btn btn-primary mx-2 col" id="quickView" href="{% url 'quickView' product.id %}">Quick View</a>
-                                <a id="add_to_cart_prod{{product.id}}" href="#" class="btn btn-primary add_to_cart col">Add to
-                                    cart</a>
+                            <div class="row prod_btn prod_info">
+                                <a class="btn btn-primary mx-2 col" id="quickView"
+                                    href="{% url 'quickView' product.id %}">Quick View</a>
                             </div>
                         </div>
                     </div>
@@ -59,10 +64,17 @@
         </a>
     </div>
 </div>
-{% endfor %}
 
+
+<div style="display: none;">
+    <ul id="hiddenProds">
+        {% for product in all_prods %}
+        <li id="prod{{product.id}}">{{product.product_name}}</li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock body %}
 
 {% block js %}
-<script src="{% static 'myshop/js/index.js' %}"></script>
+<script src="{% static 'myshop/js/quickview.js' %}"></script>
 {% endblock js %}

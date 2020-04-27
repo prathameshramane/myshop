@@ -126,6 +126,7 @@ function change_cart(){
         document.getElementById('number_of_items').innerText = count
     } else {
         html =`<h5>Your Cart is empty...<br>Please add items to cart...</h5>`
+        document.getElementById('number_of_items').innerText = 0
     }
     items_cart.innerHTML = html
 }
