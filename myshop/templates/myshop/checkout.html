@@ -1,0 +1,90 @@
+{% extends 'myshop/basic.html' %}
+{% block css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'myshop/css/checkout.css' %}">
+
+{% endblock css %}
+
+
+{% block body %}
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>Checkout form</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Your cart</span>
+                <span class="badge badge-secondary badge-pill" id="items_quantity">{{quantity}}</span>
+            </h4>
+            <ul class="list-group mb-3">
+                {% for product in products %}
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">{{product.0.0}} ({{product.1}})</h6>
+                    </div>
+                    <span class="text-muted">₹ : {{product.0.0.product_cost}}</span>
+                </li>
+                {% endfor %}
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Total (INR)</span>
+                    <strong>₹ {{total}}</strong>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8 order-md-1">
+            <h4 class="mb-3">Billing address</h4>
+            <form action="/orderplaced/" method="POST" id="checkout_form"> {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username">Name</label>
+                    <div class="input-group">
+                        <input name="customer_name" type="text" class="form-control" id="username" placeholder="Your full name">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email">Email</label>
+                    <input name="customer_email" type="email" class="form-control" id="email" placeholder="you@example.com">
+                </div>
+
+                <div class="mb-3">
+                    <label for="address">Address</label>
+                    <input name="customer_address" type="text" class="form-control" id="address" placeholder="1234 Main St">
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5 mb-3">
+                        <label for="country">Country</label>
+                        <input name="customer_country" type="text" class="form-control" id="country" placeholder="eg. India">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="state">State</label>
+                        <input name="customer_state" type="text" class="form-control" id="state" placeholder="eg. Maharashtra">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="zip">Zip</label>
+                        <input name="customer_zip" type="text" class="form-control" id="zip" placeholder="">
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <h4 class="mb-3">Payment</h4>
+
+                <div class="d-block my-3">
+                    <div class="custom-control custom-radio">
+                        <input id="cod" name="paymentMethod" type="radio" class="custom-control-input">
+                        <label name="customer_payment" class="custom-control-label" for="cod" value="cod">Cash on delivery</label>
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" id="checkout_btn" type="submit">Continue to checkout</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock body %}
+
+{% block js %}
+<script src="{% static 'myshop/js/checkout.js' %}"></script>
+{% endblock js %}

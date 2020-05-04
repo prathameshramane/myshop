@@ -31,8 +31,10 @@
                             <h5 class="card-title" id="prod{{product.id}}">{{product.product_name}}</h5>
                             <p class="card-text">{{product.product_desc}}</p>
                             <div class="row prod_btn">
-                                <a class="btn btn-primary mx-2 col" id="quickView" href="{% url 'quickView' product.id %}">Quick View</a>
-                                <a id="add_to_cart_prod{{product.id}}" href="#" class="btn btn-primary add_to_cart col">Add to
+                                <a class="btn btn-primary mx-2 col" id="quickView"
+                                    href="{% url 'quickView' product.id %}">Quick View</a>
+                                <a id="add_to_cart_prod{{product.id}}" href="#"
+                                    class="btn btn-primary add_to_cart col">Add to
                                     cart</a>
                             </div>
                         </div>
@@ -60,6 +62,11 @@
     </div>
 </div>
 {% endfor %}
+
+<form action="/checkout" method="POST"> {% csrf_token %}
+    <textarea style="display: none;" name="json"></textarea>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
 {% endblock body %}
 

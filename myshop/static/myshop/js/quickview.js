@@ -113,7 +113,10 @@ function change_cart() {
                 count += 1
             }
         }
-        html += `</ul><button class="btn btn-primary my-1 mx-3">Checkout</button>`
+        html += `</ul><form action="/checkout">
+        <textarea style="display: none;" name="json">${JSON.stringify(cart)}</textarea>
+        <button type="submit" class="btn btn-primary mx-4">Checkout</button>
+    </form>`
         document.getElementById('number_of_items').innerText = count
     } else {
         html = `<h5>Your Cart is empty...<br>Please add items to cart...</h5>`
