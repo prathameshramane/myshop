@@ -1,0 +1,46 @@
+{% extends 'myshop/basic.html' %}
+
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'myshop/css/contact.css' %}">
+{% endblock css %}
+
+{% block body %}
+
+<div class="container my-3">
+    <form action="{% url 'contact_submit' %}" id="contact_form" method="POST"> {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Last-name First-name Middle-name" name="name">
+            <small id="invalid_name" style="color: red;display: none">⊗Invalid Name.Please enter full name in this format eg.Wick John Robert </small>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="example@account.in" name="email">
+            <small id="invalid_email" style="color: red;display: none">⊗Invalid Email.Please check your email again.</small>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" id="phone"  placeholder="+91-1234567890" name="phone">
+            <small id="invalid_phone" style="color: red;display: none">⊗Invalid Phone.Please enter phone in this format eg.+91-0123456789.</small>
+        </div>
+        <div class="form-group">
+            <label for="order_id">Order ID(Optional in case of feedback)</label>
+            <input type="text" class="form-control" id="order_id"  placeholder="Enter order ID" name="id">
+        </div>
+        <div class="form-group">
+            <label for="query">Query</label>
+            <textarea type="text" class="form-control" id="query" placeholder="Describe about your query" name="query"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary EXT_btn" id="submitBtn">Submit</button>
+    </form>
+</div>
+
+{% endblock body %}
+
+
+{% block js %}
+<script src="{% static 'myshop/js/contact.js' %}"></script>
+
+{% endblock js %}

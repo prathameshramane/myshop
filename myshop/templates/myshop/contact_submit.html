@@ -1,0 +1,25 @@
+{% extends 'myshop/basic.html' %}
+
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'myshop/css/order_placed.css' %}">
+{% endblock css %}
+
+{% block body %}
+{% load static %}
+<div class="container">
+    <img src="{% static 'myshop/img/green-tick.png' %}" alt="">
+</div>
+
+<p class="text-center" id="order_success_text"><strong>Issue/feedback submitted Successfully !!!</strong></p>
+<p class="text-center"><strong>Thank you for your response</strong></p>
+
+<a href="/" id="shop_more">Continue shopping</a>
+{% endblock body %}
+
+
+{% block js %}
+
+
+{% endblock js %}
