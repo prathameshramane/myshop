@@ -1,13 +1,13 @@
 # myshop
 First E-commerce website using django.
 
-#installation
+##installation
 
 ```Requires
 Django module (powershell -> pip install django)
 ```
 
-#running project
+##running project
 ```
 In project directory run the following command using Powershell or Command prompt in windows.
 python manage.py runserver
