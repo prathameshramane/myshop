@@ -3,7 +3,7 @@ First E-commerce website using django.
 
 #installation
 ```Requires
-Django module (powershell -> pip install django)
+Django module (powershell -> pip install django)```
 
 #running project
 ```In project directory run the following command using Powershell or Command prompt in windows.
